@@ -2,6 +2,11 @@ package com.MVCProject.Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Optional;
+
+import com.MVCProject.Model.Employee;
+import com.MVCProject.Service.EmployeeServImp;
+import com.MVCProject.Service.EmployeeService;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -19,18 +24,48 @@ public class RegisterEmployee extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		RequestDispatcher rspt = request.getRequestDispatcher("dashboard.html");
 		rspt.include(request, response);
-		out.println("<div class=\"container mt-3\">\r\n" + "</form action=\"\"><div class=\"row\">\r\n"
-				+ "  <div class=\"col\">\r\n"
-				+ "    <input type=\"text\" class=\"form-control\" value=\"\" name=\"firstName\"   placeholder=\"First name\" aria-label=\"First name\">\r\n"
-				+ "  </div>\r\n" + "  <div class=\"col\">\r\n"
-				+ "    <input type=\"text\" class=\"form-control\" value=\"\"  name=\"lastName\"  placeholder=\"Last name\" aria-label=\"Last name\">\r\n"
-				+ "  </div>\r\n" + "</div>" + "<div class=\"row mt-3\">\r\n" + "  <div class=\"col\">\r\n"
-				+ "    <input type=\"text\" class=\"form-control\" name=\"salary\" placeholder=\"Salary\" aria-label=\"salary\">\r\n"
-				+ "  </div>\r\n" + "  <div class=\"col\">\r\n"
-				+ "    <input type=\"text\" class=\"form-control\" value=\"\" placeholder=\"Age\" name=\"age\" aria-label=\"age\">\r\n"
-				+ "  </div>\r\n" + "</div>" + " <button type=\"button\" class=\"btn mt-3 btn-primary\">Primary</button>"
-				+ "</form></div>");
+		out.println("<form action='' method='post'>" + "<div class='container mt-3'>"
 
+				+ "<div class='row'>" + "  <div class='col'>"
+				+ "    <input type='text' class='form-control' name='firstName' placeholder='First name'>" + "  </div>"
+				+ "  <div class='col'>"
+				+ "    <input type='text' class='form-control' name='lastName' placeholder='Last name'>" + "  </div>"
+				+ "</div>"
+
+				+ "<div class='row mt-3'>" + "  <div class='col'>"
+				+ "    <input type='text' class='form-control' name='salary' placeholder='Salary'>" + "  </div>"
+				+ "  <div class='col'>" + "    <input type='text' class='form-control' name='age' placeholder='Age'>"
+				+ "  </div>" + "</div>"
+
+				+ "<button type='submit' name = 's' class='btn mt-3 btn-primary'>Submit</button>"
+
+				+ "</div></form>");
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		Optional<Integer> salary = Optional.empty();
+		Optional<Integer> age = Optional.empty();
+		try {
+			salary = Optional.of(Integer.parseInt(request.getParameter("salary")));
+			age = Optional.of(Integer.parseInt(request.getParameter("age")));
+		} catch (NumberFormatException ex) {
+			System.out.println("Exception to convert number :" + ex);
+		}
+		Employee e = new Employee();
+		e.setFirstName(firstName);
+		e.setLastName(lastName);
+		e.setSalary(salary.orElse(0));
+		e.setAge(age.orElse(0));
+		EmployeeService es = new EmployeeServImp();
+		boolean result = es.isAddEmp(e);
+		if (result) {
+			out.println("<html><body>" + "<script> "
+					+ "alert('Employee Added Successfully'); window.location = 'dashboard.html' " + "</script>"
+					+ "</body></html>");
+		} else {
+			out.println("<html><body>" + "<script> "
+					+ "alert('Problem to Add Employee'); window.location = 'dashboard.html " + "</script>"
+					+ "</body></html>");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
