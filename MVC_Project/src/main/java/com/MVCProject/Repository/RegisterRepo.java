@@ -6,4 +6,6 @@ public interface RegisterRepo {
 	boolean isRegister(User u);
 
 	boolean alredayRegister(User u);
+
+	boolean isLogin(User u);
 }

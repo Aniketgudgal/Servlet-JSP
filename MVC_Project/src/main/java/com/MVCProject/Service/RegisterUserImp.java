@@ -22,4 +22,9 @@ public class RegisterUserImp implements RegisterUserService {
 		}
 	}
 
+	@Override
+	public boolean isLogin(User u) {
+		return rr.isLogin(u) ? true : false;
+	}
+
 }

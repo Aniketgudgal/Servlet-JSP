@@ -10,9 +10,9 @@ public class RegisterRepoImp extends DBConfig implements RegisterRepo {
 	public boolean isRegister(User u) {
 		try {
 			pst = conn.prepareStatement("insert into user values('0',?,?,?,?,?)");
-			pst.setString(1, u.getFName());
-			pst.setString(2, u.getLName());
-			pst.setString(3, u.getEmail());
+			pst.setString(1, u.getFName().toLowerCase());
+			pst.setString(2, u.getLName().toLowerCase());
+			pst.setString(3, u.getEmail().toLowerCase());
 			pst.setString(4, u.getContact());
 			pst.setString(5, u.getPassword());
 			if (pst.executeUpdate() > 0) {
@@ -32,7 +32,7 @@ public class RegisterRepoImp extends DBConfig implements RegisterRepo {
 	public boolean alredayRegister(User u) {
 		try {
 			pst = conn.prepareStatement("select * from user where email = ? and contact = ? and password = ?");
-			pst.setString(1, u.getEmail());
+			pst.setString(1, u.getEmail().toLowerCase());
 			pst.setString(2, u.getContact());
 			pst.setString(3, u.getPassword());
 			rs = pst.executeQuery();
@@ -44,6 +44,24 @@ public class RegisterRepoImp extends DBConfig implements RegisterRepo {
 
 		} catch (SQLException e) {
 			System.out.println("Exception in alredy register repo: " + e);
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isLogin(User u) {
+		try {
+			pst = conn.prepareStatement("select * from user where email = ? and password = ?");
+			pst.setString(1, u.getEmail());
+			pst.setString(2, u.getPassword());
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (SQLException e) {
+			System.out.println("Exception in login page: " + e);
 			return false;
 		}
 	}
