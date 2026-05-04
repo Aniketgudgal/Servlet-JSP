@@ -49,7 +49,7 @@ public class ViewEmployee extends HttpServlet {
 				out.println("<td class = 'text-center align-middle'>" + e.getLastName() + "</td>");
 				out.println("<td class = 'text-center align-middle'>" + e.getAge() + "</td>");
 				out.println("<td class = 'text-center align-middle'>" + e.getSalary() + "</td>");
-				out.println("<td class = 'text-center align-middle'><a href='?id=" + e.getId()
+				out.println("<td class = 'text-center align-middle'><a href='updateEmployee?id=" + e.getId()
 						+ "'><img src='Images/updated.png' class = 'img-fluid' width = '30' alt='Image not found'></a></td>");
 				out.println("<td class = 'text-center align-middle'><a href='delEmp?id=" + e.getId()
 						+ "' ><img src='Images/delete.png' class = 'img-fluid' width = '28' alt='Image not found'></a></td>");

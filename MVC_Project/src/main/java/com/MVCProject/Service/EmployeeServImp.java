@@ -33,4 +33,14 @@ public class EmployeeServImp implements EmployeeService {
 		return ep.isDeleteEmployee(id);
 	}
 
+	@Override
+	public Optional<Employee> getEmployee(int id) {
+		return ep.getEmployee(id);
+	}
+
+	@Override
+	public boolean updateEmpInfo(Employee emp) {
+		return ep.updateEmpInfo(emp);
+	}
+
 }

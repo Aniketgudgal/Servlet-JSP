@@ -11,4 +11,8 @@ public interface EmployeeRepo {
 	Optional<List<Employee>> getEmployee();
 
 	boolean isDeleteEmployee(int id);
+
+	Optional<Employee> getEmployee(int id);
+
+	boolean updateEmpInfo(Employee emp);
 }

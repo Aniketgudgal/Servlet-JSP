@@ -62,4 +62,44 @@ public class EmployeeRepoImp extends DBConfig implements EmployeeRepo {
 		}
 	}
 
+	@Override
+	public Optional<Employee> getEmployee(int id) {
+		try {
+			pst = conn.prepareStatement("select * from employee where empId = ?");
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				Employee e = new Employee();
+				e.setId(rs.getInt(1));
+				e.setFirstName(rs.getString(2));
+				e.setLastName(rs.getString(3));
+				e.setAge(rs.getInt(4));
+				e.setSalary(rs.getInt(5));
+				return Optional.of(e);
+			} else {
+				return Optional.empty();
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			return Optional.empty();
+		}
+	}
+
+	@Override
+	public boolean updateEmpInfo(Employee emp) {
+		try {
+			pst = conn.prepareStatement(
+					"update employee set firstName = ? , lastName = ? , age = ? , salary = ? where empId = ?");
+			pst.setString(1, emp.getFirstName());
+			pst.setString(2, emp.getLastName());
+			pst.setInt(3, emp.getAge());
+			pst.setInt(4, emp.getSalary());
+			pst.setInt(5, emp.getId());
+			return pst.executeUpdate() > 0 ? true : false;
+		} catch (Exception e) {
+			System.out.println("Error to update info" + e);
+			return false;
+		}
+	}
+
 }

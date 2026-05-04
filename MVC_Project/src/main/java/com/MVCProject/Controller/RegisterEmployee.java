@@ -44,10 +44,17 @@ public class RegisterEmployee extends HttpServlet {
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		Optional<Integer> salary = Optional.empty();
+		String ageStr = request.getParameter("age");
 		Optional<Integer> age = Optional.empty();
+		if (ageStr != null && !ageStr.isEmpty()) {
+			try {
+				age = Optional.of(Integer.parseInt(ageStr));
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid age");
+			}
+		}
 		try {
 			salary = Optional.of(Integer.parseInt(request.getParameter("salary")));
-			age = Optional.of(Integer.parseInt(request.getParameter("age")));
 		} catch (NumberFormatException ex) {
 			System.out.println("Exception to convert number :" + ex);
 		}

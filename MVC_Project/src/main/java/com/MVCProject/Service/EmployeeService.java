@@ -11,4 +11,8 @@ public interface EmployeeService {
 	Optional<List<Employee>> getEmployee();
 
 	boolean isDeleteEmployee(int id);
+
+	Optional<Employee> getEmployee(int id);
+
+	boolean updateEmpInfo(Employee emp);
 }
