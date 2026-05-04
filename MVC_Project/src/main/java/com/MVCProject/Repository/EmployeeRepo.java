@@ -9,4 +9,6 @@ public interface EmployeeRepo {
 	boolean isAdded(Employee emp);
 
 	Optional<List<Employee>> getEmployee();
+
+	boolean isDeleteEmployee(int id);
 }

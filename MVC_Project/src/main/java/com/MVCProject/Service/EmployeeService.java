@@ -9,4 +9,6 @@ public interface EmployeeService {
 	boolean isAddEmp(Employee emp);
 
 	Optional<List<Employee>> getEmployee();
+
+	boolean isDeleteEmployee(int id);
 }

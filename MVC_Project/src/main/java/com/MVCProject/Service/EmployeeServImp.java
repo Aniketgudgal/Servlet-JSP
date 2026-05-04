@@ -28,4 +28,9 @@ public class EmployeeServImp implements EmployeeService {
 		return ep.getEmployee();
 	}
 
+	@Override
+	public boolean isDeleteEmployee(int id) {
+		return ep.isDeleteEmployee(id);
+	}
+
 }

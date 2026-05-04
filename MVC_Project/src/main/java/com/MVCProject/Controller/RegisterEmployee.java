@@ -27,14 +27,15 @@ public class RegisterEmployee extends HttpServlet {
 		out.println("<form action='' method='post'>" + "<div class='container mt-3'>"
 
 				+ "<div class='row'>" + "  <div class='col'>"
-				+ "    <input type='text' class='form-control' name='firstName' placeholder='First name'>" + "  </div>"
-				+ "  <div class='col'>"
-				+ "    <input type='text' class='form-control' name='lastName' placeholder='Last name'>" + "  </div>"
-				+ "</div>"
+				+ "    <input type='text' class='form-control' autocomplete= 'off' name='firstName' placeholder='First name'>"
+				+ "  </div>" + "  <div class='col'>"
+				+ "    <input type='text' class='form-control' name='lastName' autocomplete = 'off' placeholder='Last name'>"
+				+ "  </div>" + "</div>"
 
 				+ "<div class='row mt-3'>" + "  <div class='col'>"
-				+ "    <input type='text' class='form-control' name='salary' placeholder='Salary'>" + "  </div>"
-				+ "  <div class='col'>" + "    <input type='text' class='form-control' name='age' placeholder='Age'>"
+				+ "    <input type='text' class='form-control' name='salary' autocomplete = 'off' placeholder='Salary'>"
+				+ "  </div>" + "  <div class='col'>"
+				+ "    <input type='text' class='form-control' name='age' autocomplete = 'off' placeholder='Age'>"
 				+ "  </div>" + "</div>"
 
 				+ "<button type='submit' name = 's' class='btn mt-3 btn-primary'>Submit</button>"

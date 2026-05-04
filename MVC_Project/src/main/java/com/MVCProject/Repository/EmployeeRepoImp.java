@@ -36,6 +36,7 @@ public class EmployeeRepoImp extends DBConfig implements EmployeeRepo {
 			List<Employee> al = new ArrayList<>();
 			while (rs.next()) {
 				Employee e = new Employee();
+				e.setId(rs.getInt(1));
 				e.setFirstName(rs.getString(2));
 				e.setLastName(rs.getString(3));
 				e.setAge(rs.getInt(4));
@@ -46,6 +47,18 @@ public class EmployeeRepoImp extends DBConfig implements EmployeeRepo {
 		} catch (SQLException ex) {
 			System.out.println("Error to select employee from database: " + ex);
 			return Optional.empty();
+		}
+	}
+
+	@Override
+	public boolean isDeleteEmployee(int id) {
+		try {
+			pst = conn.prepareStatement("delete from employee where empId= ?");
+			pst.setInt(1, id);
+			return pst.executeUpdate() > 0 ? true : false;
+		} catch (SQLException e) {
+			System.out.println("Exception to delete employee" + e);
+			return false;
 		}
 	}
 
