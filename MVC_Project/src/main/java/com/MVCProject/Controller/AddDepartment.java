@@ -24,10 +24,11 @@ public class AddDepartment extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		RequestDispatcher rdp = request.getRequestDispatcher("dashboard.html");
 		rdp.include(request, response);
-		out.println("<form action = '' method = 'GET'><div class = 'container'>"
+		out.println("<form action = '' method = 'POST'><div class = 'container'>"
 				+ "<div class = 'row mt-2'><label for='department' class='form-label'>Enter Department Name</label>"
 				+ "<div class = 'col-4'><input type='text' name = 'deptName' value = '' class='form-control mt-2' > <div  class= 'col-6'>");
-		out.println("<button class='btn btn-primary mt-3' type='submit'>Add Deparment</button>");
+		out.println(
+				"<button class='btn btn-primary mt-3' onclick = 'return addDeptConfirm()' type='submit'>Add Deparment</button>");
 		out.println("</div></div>");
 		out.println("</form>");
 		String name = request.getParameter("deptName");

@@ -15,4 +15,6 @@ public interface EmployeeService {
 	Optional<Employee> getEmployee(int id);
 
 	boolean updateEmpInfo(Employee emp);
+
+	Optional<List<Employee>> getEmployee(String val);
 }

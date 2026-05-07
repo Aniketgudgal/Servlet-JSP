@@ -28,7 +28,7 @@ public class UpdateDetails extends HttpServlet {
 		int id = Integer.parseInt((request.getParameter("id").trim()));
 		int age = Integer.parseInt(request.getParameter("age").trim());
 		int salary = Integer.parseInt(request.getParameter("salary").trim());
-		Employee newData = new Employee(id, firstName, lastName, salary, age);
+		Employee newData = new Employee(id, firstName, lastName, salary, age, 0);
 		EmployeeService s = new EmployeeServImp();
 		boolean result = s.updateEmpInfo(newData);
 		if (result) {

@@ -28,6 +28,12 @@ public class ViewEmployee extends HttpServlet {
 		int count = 1;
 		RequestDispatcher rsd = request.getRequestDispatcher("dashboard.html");
 		rsd.include(request, response);
+		out.println("<div class = 'container mx-auto m-3'>");
+		out.println(
+				" <div class = 'row'><form action = '' class='d-flex gap-3 justify-content-center' role='search'>  <input id = 'data' autocomplete = 'off' class='w-50' type='search' placeholder='Search' aria-label='Search'/> "
+						+ "<button type='button' onclick = 'accessDataEmp()' class='btn btn-secondary'>Search</button>"
+						+ " </form></div>");
+		out.println("</div>");
 		out.println("<table class='table  table-bordered  table-hover table-striped'>");
 		out.println("<thead class='table-primary'>");
 		out.println("<tr>");
@@ -40,6 +46,7 @@ public class ViewEmployee extends HttpServlet {
 		out.println("<td class = 'text-center align-middle'>Delete Employee</td>");
 		out.println("</tr>");
 		out.println("</thead>");
+		out.println("<tbody id = 'tbody'>");
 		List<Employee> al = o.get();
 		if (!al.isEmpty()) {
 			for (Employee e : al) {
@@ -51,13 +58,16 @@ public class ViewEmployee extends HttpServlet {
 				out.println("<td class = 'text-center align-middle'>" + e.getSalary() + "</td>");
 				out.println("<td class = 'text-center align-middle'><a href='updateEmployee?id=" + e.getId()
 						+ "'><img src='Images/updated.png' class = 'img-fluid' width = '30' alt='Image not found'></a></td>");
-				out.println("<td class = 'text-center align-middle'><a href='delEmp?id=" + e.getId()
-						+ "' ><img src='Images/delete.png' class = 'img-fluid' width = '28' alt='Image not found'></a></td>");
+				out.println(
+						"<td class = 'text-center align-middle'><a onclick='return confirmDelete()' href='delEmp?id="
+								+ e.getId()
+								+ "' ><img src='Images/delete.png' class = 'img-fluid' width = '28' alt='Image not found'></a></td>");
 				out.println("</tr>");
 			}
 		} else {
 			out.println("<tr><td class = 'text-center align-middle' colspan = '7'>No Record Found</td></tr>");
 		}
+		out.println("</tbody>");
 		out.println("</table>");
 	}
 

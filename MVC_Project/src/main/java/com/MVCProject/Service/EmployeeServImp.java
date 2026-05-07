@@ -13,7 +13,7 @@ public class EmployeeServImp implements EmployeeService {
 	@Override
 	public boolean isAddEmp(Employee emp) {
 		if (emp.getFirstName().length() == 0 || emp.getLastName().length() == 0 || emp.getSalary() == 0
-				|| emp.getAge() == 0) {
+				|| emp.getAge() == 0 || emp.getDeptId() == 0) {
 			return false;
 		} else if (emp.getFirstName().isEmpty() || emp.getLastName().isEmpty()) {
 			return false;
@@ -41,6 +41,11 @@ public class EmployeeServImp implements EmployeeService {
 	@Override
 	public boolean updateEmpInfo(Employee emp) {
 		return ep.updateEmpInfo(emp);
+	}
+
+	@Override
+	public Optional<List<Employee>> getEmployee(String val) {
+		return ep.getEmployee(val);
 	}
 
 }

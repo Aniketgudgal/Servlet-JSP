@@ -37,10 +37,11 @@ public class UpdateEmpInfo extends HttpServlet {
 				+ "    <input type='text' name = 'age' value='" + e.getAge() + "' class='form-control mt-2' >"
 				+ "</div>");
 		out.println("<input type = 'hidden' name = 'id' class = 'form-control' value = '" + e.getId() + "'>");
-		out.println("<div class='mb-6 mt-2'>" + "<label for='salary' class='form-label'>Last Name</label>"
+		out.println("<div class='mb-6 mt-2'>" + "<label for='salary' class='form-label'>Salay</label>"
 				+ "    <input type='text' name = 'salary' value= '" + e.getSalary() + "' class='form-control mt-2' >"
 				+ "</div>");
-		out.println("<button type='submit' class='btn btn-primary mt-4'>Submit</button></form></div>");
+		out.println(
+				"<button type='submit' onclick = 'return updateConfirm()' class='btn btn-primary mt-4'>Submit</button>    <a href = 'viewEmp' class = 'btn mt-4 btn-primary'>View Employees</a>   </form></div>");
 
 	}
 

@@ -12,11 +12,12 @@ public class EmployeeRepoImp extends DBConfig implements EmployeeRepo {
 	@Override
 	public boolean isAdded(Employee emp) {
 		try {
-			pst = conn.prepareStatement("insert into Employee values('0',?,?,?,?)");
+			pst = conn.prepareStatement("insert into Employee values('0',?,?,?,?,?)");
 			pst.setString(1, emp.getFirstName());
 			pst.setString(2, emp.getLastName());
 			pst.setInt(3, emp.getAge());
 			pst.setInt(4, emp.getSalary());
+			pst.setInt(5, emp.getDeptId());
 			if (pst.executeUpdate() > 0) {
 				return true;
 			} else {
@@ -41,6 +42,8 @@ public class EmployeeRepoImp extends DBConfig implements EmployeeRepo {
 				e.setLastName(rs.getString(3));
 				e.setAge(rs.getInt(4));
 				e.setSalary(rs.getInt(5));
+				Integer fkey = rs.getObject("deptId", Integer.class);
+				e.setDeptId(fkey);
 				al.add(e);
 			}
 			return Optional.of(al);
@@ -99,6 +102,31 @@ public class EmployeeRepoImp extends DBConfig implements EmployeeRepo {
 		} catch (Exception e) {
 			System.out.println("Error to update info" + e);
 			return false;
+		}
+	}
+
+	@Override
+	public Optional<List<Employee>> getEmployee(String val) {
+		try {
+			pst = conn.prepareStatement("select * from employee where firstName like ?");
+			pst.setString(1, "%" + val + "%");
+			rs = pst.executeQuery();
+			List<Employee> al = new ArrayList<>();
+			while (rs.next()) {
+				Employee e = new Employee();
+				e.setId(rs.getInt(1));
+				e.setFirstName(rs.getString(2));
+				e.setLastName(rs.getString(3));
+				e.setAge(rs.getInt(4));
+				e.setSalary(rs.getInt(5));
+				Integer fkey = rs.getObject("deptId", Integer.class);
+				e.setDeptId(fkey);
+				al.add(e);
+			}
+			return Optional.of(al);
+		} catch (SQLException ex) {
+			System.out.println("Problem to get data employee: " + ex);
+			return Optional.empty();
 		}
 	}
 

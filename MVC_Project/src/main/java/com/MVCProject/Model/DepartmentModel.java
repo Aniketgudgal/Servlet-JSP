@@ -1,14 +1,12 @@
 package com.MVCProject.Model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class DepartmentModel {
 	private int id;
 	private String name;

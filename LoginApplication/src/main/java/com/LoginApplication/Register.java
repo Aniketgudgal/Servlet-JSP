@@ -14,57 +14,76 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/register")
-public class register extends HttpServlet {
+public class Register extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType(Messages.getString("register.0")); //$NON-NLS-1$
+
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+
+		String fname = request.getParameter("fname");
+		String lname = request.getParameter("lname");
+		String contact = request.getParameter("contact");
+		System.out.println(contact);
+		String email = request.getParameter("email");
+		String pass = request.getParameter("password");
+
 		try {
-			Class.forName(Messages.getString("register.1")); //$NON-NLS-1$
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			out.println(Messages.getString("register.2")); //$NON-NLS-1$
-		}
-		try {
-			String name = request.getParameter(Messages.getString("register.3")); //$NON-NLS-1$
-			String email = request.getParameter(Messages.getString("register.4")); //$NON-NLS-1$
-			String pass = request.getParameter(Messages.getString("register.5")); //$NON-NLS-1$
-			Connection conn = DriverManager.getConnection(Messages.getString("register.6"), Messages.getString("register.7"), Messages.getString("register.8")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/servlet", "root", "Aniket@5867");
+
 			if (conn != null) {
+
 				PreparedStatement check = conn
-						.prepareStatement(Messages.getString("register.9")); //$NON-NLS-1$
-				check.setString(1, name);
-				check.setString(2, email);
+						.prepareStatement("SELECT * FROM user WHERE lname=? and fname = ? or email=?");
+				check.setString(1, lname);
+				check.setString(2, fname);
+				check.setString(3, email);
+
 				ResultSet rs = check.executeQuery();
+
 				if (rs.next()) {
-					out.println(Messages.getString("register.10")); //$NON-NLS-1$
+					out.println("<h1>User already exists</h1>");
 				} else {
-					PreparedStatement ps = conn.prepareStatement(Messages.getString("register.11")); //$NON-NLS-1$
-					ps.setString(1, name);
-					ps.setString(2, email);
-					ps.setString(3, pass);
+
+					PreparedStatement ps = conn.prepareStatement(
+							"INSERT INTO user(fname,lname, email, contact, password) VALUES(?,?,?,?,?)");
+
+					ps.setString(1, fname);
+					ps.setString(2, lname);
+					ps.setString(3, email);
+					ps.setString(4, contact);
+					ps.setString(5, pass);
+
 					int result = ps.executeUpdate();
+
 					if (result > 0) {
-						out.println(Messages.getString("register.12")); //$NON-NLS-1$
+						response.sendRedirect("data.html");
 					} else {
-						out.println(Messages.getString("register.13")); //$NON-NLS-1$
+						out.println("<p>Problem while registering</p>");
 					}
 				}
+				rs.close();
+				check.close();
+				conn.close();
+
 			} else {
-				out.println(Messages.getString("register.14")); //$NON-NLS-1$
+				out.println("<p>Database connection failed</p>");
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			out.println(Messages.getString("register.15")); //$NON-NLS-1$
+			out.println("<p>Error: " + e.getMessage() + "</p>");
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
-	}
 
+		response.sendRedirect("register.html");
+	}
 }
