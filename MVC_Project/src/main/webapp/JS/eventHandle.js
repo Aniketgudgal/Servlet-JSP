@@ -50,10 +50,3 @@ function accessDataEmp() {
 
     aj.send();
 }
-
-function accessDeptSearch()
-{
-	let data = document.getElementById("deptName");
-	let val = data.value;
-	console.log(val);
-}
