@@ -15,4 +15,6 @@ public interface DepartService {
 	Optional<DepartmentModel> getDepartment(int id);
 
 	boolean isUpdated(DepartmentModel model);
+
+	Optional<List<DepartmentModel>> getDepartment(String input);
 }

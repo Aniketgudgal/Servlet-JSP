@@ -16,4 +16,5 @@ public interface DepartRepo {
 
 	boolean isUpdated(DepartmentModel model);
 
+	Optional<List<DepartmentModel>> getDepartment(String input);
 }

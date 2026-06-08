@@ -9,7 +9,7 @@ public class RegisterRepoImp extends DBConfig implements RegisterRepo {
 	@Override
 	public boolean isRegister(User u) {
 		try {
-			pst = conn.prepareStatement("insert into user values('0',?,?,?,?,?)");
+			pst = conn.prepareStatement("insert into user() values('0',?,?,?,?,?)");
 			pst.setString(1, u.getFName().toLowerCase());
 			pst.setString(2, u.getLName().toLowerCase());
 			pst.setString(3, u.getEmail().toLowerCase());

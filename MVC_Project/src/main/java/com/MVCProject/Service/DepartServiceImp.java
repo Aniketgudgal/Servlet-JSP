@@ -36,4 +36,13 @@ public class DepartServiceImp implements DepartService {
 		return dp.isUpdated(model);
 	}
 
+	@Override
+	public Optional<List<DepartmentModel>> getDepartment(String input) {
+		if (!input.isEmpty() && input.length() != 0) {
+			return dp.getDepartment(input);
+		} else {
+			return Optional.empty();
+		}
+	}
+
 }

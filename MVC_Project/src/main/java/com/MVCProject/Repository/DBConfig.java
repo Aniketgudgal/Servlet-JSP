@@ -14,7 +14,7 @@ public class DBConfig {
 	public DBConfig() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/servlet", "root", "Aniket@5867");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/servlet", "root", "Pass@12345");
 
 		} catch (SQLException | ClassNotFoundException ex) {
 			System.out.println("Exception in connection : " + ex);

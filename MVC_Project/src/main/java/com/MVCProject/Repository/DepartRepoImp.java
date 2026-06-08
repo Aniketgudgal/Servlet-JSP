@@ -81,4 +81,25 @@ public class DepartRepoImp extends DBConfig implements DepartRepo {
 		return false;
 	}
 
+	@Override
+	public Optional<List<DepartmentModel>> getDepartment(String input) {
+		try {
+			pst = conn.prepareStatement("select * from department where name like ?");
+			pst.setString(1, "%" + input + "%");
+			rs = pst.executeQuery();
+			List<DepartmentModel> ls = new ArrayList<>();
+			while (rs.next()) {
+				DepartmentModel d = new DepartmentModel();
+				d.setId(rs.getInt(1));
+				d.setName(rs.getString(2));
+				ls.add(d);
+				d = null;
+			}
+			return Optional.of(ls);
+		} catch (SQLException ex) {
+			System.out.println("Problem in search department: " + ex);
+			return Optional.empty();
+		}
+	}
+
 }

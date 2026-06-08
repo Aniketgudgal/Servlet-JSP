@@ -25,6 +25,14 @@ public class ViewDepartment extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		RequestDispatcher rs = request.getRequestDispatcher("dashboard.html");
 		rs.include(request, response);
+		out.println("<div class = 'container mx-auto mt-3'>");
+		out.println("<div class = 'row'> "
+				+ "<form class = 'd-flex gap-3 justify-content-center mb-3' action = '' role = 'search'>");
+		out.println(
+				"<input type = 'search' autocomplete = 'off' name= 'search' class = 'w-50 h-5 form-control' id = 'deptName' placeholder = 'Search Department'>");
+		out.println(
+				"<button type = 'button' onclick = 'displayData()' class = 'col-1 btn btn-primary' >Search</button>");
+		out.println("</form>" + "</div></div>");
 		out.println("<div class= 'container'>");
 		out.println("<table class = ' text-center container p-5 table  table-bordered mt-2 table-hover'>");
 		out.println("<thead class = ' table-primary'>");
@@ -35,7 +43,7 @@ public class ViewDepartment extends HttpServlet {
 		out.println("<td>Delete Department</td>");
 		out.println("</tr>");
 		out.println("</thead>");
-		out.println("<tbody>");
+		out.println("<tbody id = 'deptData'>");
 		DepartService ds = new DepartServiceImp();
 		Optional<List<DepartmentModel>> op = ds.getDepartment();
 		if (!(op.get().isEmpty())) {

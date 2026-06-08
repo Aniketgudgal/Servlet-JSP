@@ -30,8 +30,8 @@ public class ViewEmployee extends HttpServlet {
 		rsd.include(request, response);
 		out.println("<div class = 'container mx-auto m-3'>");
 		out.println(
-				" <div class = 'row'><form action = '' class='d-flex gap-3 justify-content-center' role='search'>  <input id = 'data' autocomplete = 'off' class='w-50' type='search' placeholder='Search' aria-label='Search'/> "
-						+ "<button type='button' onclick = 'accessDataEmp()' class='btn btn-secondary'>Search</button>"
+				" <div class = 'row'><form action = '' class='d-flex gap-3 justify-content-center' role='search'>  <input id = 'data' autocomplete = 'off' class='w-50 form-control' type='search' placeholder='Search Employee' aria-label='Search'/> "
+						+ "<button type='button' onclick = 'accessDataEmp()' class='col-1 btn btn-secondary'>Search</button>"
 						+ " </form></div>");
 		out.println("</div>");
 		out.println("<table class='table  table-bordered  table-hover table-striped'>");
