@@ -37,9 +37,6 @@ Each folder in this repository is a separate Maven web application or server con
   - Contains Apache Tomcat server configuration files for Tomcat runtime settings.
   - Useful when deploying and testing these projects with a local server instance.
 
-- `TestSync/`
-  - Contains an additional Tomcat server workspace and example project setup.
-
 ## How this documentation is organized
 
 This README explains:
