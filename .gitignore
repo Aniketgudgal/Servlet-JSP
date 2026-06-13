@@ -6,6 +6,7 @@ target/
 .project
 .classpath
 .settings/
+Servers
 
 # Java
 *.class

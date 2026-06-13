@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register User</title>
+    <link rel="stylesheet" href="CSS/register.css" />
+    <link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+	crossorigin="anonymous"
+>
+  </head>
+  <body>
+    <div class="container">
+      <div class="register-div">
+        <div class="title">
+          <h1>Registration Form</h1>
+        </div>
+        <div class="content">
+          <table>  
+           <form class = "form-control" action="register" method="post">
+              <tr>
+                <td><label for="fname">First Name:</label></td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="text" class = "form-control" name="fname" value="" autocomplete="off" />
+                </td>
+              </tr>
+              <tr>
+                <td><label for="lname">Last Name:</label></td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="text" name="lname" class = "form-control" value="" autocomplete="off" />
+                </td>
+              </tr>
+              <tr>
+                <td><label for="email">Email:</label></td>
+              </tr>
+              <tr>
+                <td>
+                  <input
+                    type="email"
+                    name="email"
+                    value=""
+                    class = "form-control"
+                    autocomplete="off"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td><label for="password">Password:</label></td>
+              </tr>
+              <tr>
+                <td>
+                  <input
+                    type="password"
+                    name="password"
+                    value=""
+                    class = "form-control"
+                    autocomplete="off"
+                  />
+                </td>
+              </tr>
+               <tr>
+                <td><label for="confirm-password">Confirm Password:</label></td>
+              </tr>
+              <tr>
+                <td>
+                  <input
+                    type="password"
+                    name="confirm-password"
+                    value=""
+                    class = "form-control"
+                    autocomplete="off"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td><button class = "form-control btn btn-success">Register</button></td>
+              </tr>
+              <tr>
+                <td><a href = "login.html" class = "btn btn-primary w-100">Login</a></td>
+              </tr>
+               </form>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+    
+    <script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+		crossorigin="anonymous"
+	></script>
+  </body>
+</html>
