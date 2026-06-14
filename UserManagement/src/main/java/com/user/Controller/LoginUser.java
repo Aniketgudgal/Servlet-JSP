@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import com.user.Model.User;
 import com.user.Service.UserService;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,7 +22,8 @@ public class LoginUser extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String email = request.getParameter("email");
 		String pass = request.getParameter("password");
-		if (email.length() > 0 && pass.length() > 0) {
+		RequestDispatcher req = request.getRequestDispatcher("validate");
+		if (email != null && pass != null && email.length() > 0 && pass.length() > 0) {
 			UserService us = new UserService();
 			User u = new User();
 			u.setEmail(email);
@@ -29,13 +31,12 @@ public class LoginUser extends HttpServlet {
 			if (us.login(u)) {
 				HttpSession session = request.getSession();
 				session.setAttribute("email", email);
-				out.println("<html><body>");
-				out.println("<script>");
-				out.println("alert('Login successful');");
-				out.println("window.location = 'Dashboard.html';");
-				out.println("</script>");
-				out.println("</body></html>");
+				req.forward(request, response);
+
 			} else {
+				response.setHeader("Cache-Control", "no-cache, no-store, must-invalidate");
+				response.setHeader("Pragma", "no-cache");
+				response.setDateHeader("Expires", 0);
 				out.println("<html><body>");
 				out.println("<script>");
 				out.println("alert('Enter the Valid Data');");
